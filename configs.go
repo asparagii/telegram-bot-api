@@ -956,9 +956,10 @@ type UpdateConfig struct {
 
 // WebhookConfig contains information about a SetWebhook request.
 type WebhookConfig struct {
-	URL            *url.URL
-	Certificate    interface{}
-	MaxConnections int
+    URL            *url.URL     `json:"url"`
+    Certificate    interface{}  `json:"certificate"`
+    MaxConnections int          `json:"max_connections"`
+    AllowedUpdates []string     `json:"allowed_updates"`
 }
 
 // FileBytes contains information about a set of bytes to upload

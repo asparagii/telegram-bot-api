@@ -483,6 +483,15 @@ func (bot *BotAPI) SetWebhook(config WebhookConfig) (APIResponse, error) {
 		params["max_connections"] = strconv.Itoa(config.MaxConnections)
 	}
 
+    if len(config.AllowedUpdates) > 0 {
+        acc := "["
+        for _, update := range config.AllowedUpdates {
+            acc = fmt.Sprintf("%s,%s", acc, update)
+        }
+        acc += "]"
+        params["allowed_updates"] = acc
+    }
+
 	resp, err := bot.UploadFile("setWebhook", params, "certificate", config.Certificate)
 	if err != nil {
 		return APIResponse{}, err
